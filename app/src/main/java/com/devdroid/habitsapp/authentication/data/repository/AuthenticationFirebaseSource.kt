@@ -15,4 +15,13 @@ class AuthenticationFirebaseSource : AuthenticationDataSource{
             Result.failure(e)
         }
     }
+
+    override suspend fun signup(email: String, password: String): Result<Unit> {
+        return try {
+            Firebase.auth.createUserWithEmailAndPassword(email, password).await()
+            Result.success(Unit)
+        }catch (e: Exception){
+            Result.failure(e)
+        }
+    }
 }

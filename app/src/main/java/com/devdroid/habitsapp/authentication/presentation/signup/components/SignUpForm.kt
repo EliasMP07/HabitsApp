@@ -37,6 +37,7 @@ import com.devdroid.habitsapp.core.presentation.HabitTitle
 fun SignUpForm(
     state: SignUpState,
     onEvent: (SignUpEvent) -> Unit,
+    onSignUp :() -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val focusManager = LocalFocusManager.current
@@ -104,10 +105,10 @@ fun SignUpForm(
                 .padding(horizontal = 20.dp),
             isEnable = !state.isLoading,
         ) {
-            onEvent(SignUpEvent.SignIn)
+            onEvent(SignUpEvent.SignUp)
         }
         TextButton(onClick = {
-            onEvent(SignUpEvent.SignIn)
+            onSignUp()
         }) {
             Text(
                 text = buildAnnotatedString {
