@@ -4,6 +4,7 @@ import com.devdroid.habitsapp.home.data.extension.toStartOfDateTimestamp
 import com.devdroid.habitsapp.home.data.extension.toTimeStamp
 import com.devdroid.habitsapp.home.data.extension.toZonedDateTime
 import com.devdroid.habitsapp.home.data.local.entity.HabitEntity
+import com.devdroid.habitsapp.home.data.local.entity.HabitSyncEntity
 import com.devdroid.habitsapp.home.data.remote.dto.HabitDto
 import com.devdroid.habitsapp.home.data.remote.dto.HabitResponse
 import com.devdroid.habitsapp.home.domain.models.Habit
@@ -57,4 +58,8 @@ fun HabitResponse.toDomain(): List<Habit>{
             startDate = dto.startDate.toZonedDateTime()
         )
     }
+}
+
+fun Habit.toSyncEntity(): HabitSyncEntity {
+    return HabitSyncEntity(id)
 }

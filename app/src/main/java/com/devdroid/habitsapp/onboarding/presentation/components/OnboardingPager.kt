@@ -33,12 +33,14 @@ import com.devdroid.habitsapp.R
 import com.devdroid.habitsapp.core.presentation.HabitButton
 import com.devdroid.habitsapp.core.presentation.HabitTitle
 import com.devdroid.habitsapp.onboarding.presentation.OnBoardingPagerInformation
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnboardingPager(
     pages: List<OnBoardingPagerInformation>,

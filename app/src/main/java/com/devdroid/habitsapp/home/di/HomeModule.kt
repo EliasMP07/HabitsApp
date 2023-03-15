@@ -2,6 +2,7 @@ package com.devdroid.habitsapp.home.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.work.WorkManager
 import com.devdroid.habitsapp.home.data.alarm.AlarmHandlerAndroid
 import com.devdroid.habitsapp.home.data.local.dao.HomeDao
 import com.devdroid.habitsapp.home.data.local.database.HomeDatabase
@@ -15,6 +16,7 @@ import com.devdroid.habitsapp.home.domain.detail.usecases.InsertHabit
 import com.devdroid.habitsapp.home.domain.home.usecases.CompleteHabitUseCase
 import com.devdroid.habitsapp.home.domain.home.usecases.GetHabitsForDate
 import com.devdroid.habitsapp.home.domain.home.usecases.HomeUseCases
+import com.devdroid.habitsapp.home.domain.home.usecases.SyncHabits
 import com.devdroid.habitsapp.home.domain.repository.HomeDataSource
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -34,19 +36,21 @@ object HomeModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpCliente(): OkHttpClient{
+    fun provideOkHttpCliente(): OkHttpClient {
         return OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }).build()
     }
+
     @Singleton
     @Provides
-    fun provideHomeApi(okHttpClient: OkHttpClient): HomeApi{
+    fun provideHomeApi(okHttpClient: OkHttpClient): HomeApi {
         return Retrofit.Builder()
             .baseUrl(HomeApi.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create()).build().create(HomeApi::class.java)
     }
+
     @Provides
     @Singleton
     fun provideHabitDao(@ApplicationContext context: Context, moshi: Moshi): HomeDao {
@@ -59,18 +63,25 @@ object HomeModule {
 
     @Provides
     @Singleton
-    fun provideAlarmHandler(@ApplicationContext context: Context): AlarmHandler{
+    fun provideAlarmHandler(@ApplicationContext context: Context): AlarmHandler {
         return AlarmHandlerAndroid(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideWorkManager(@ApplicationContext context: Context): WorkManager{
+        return WorkManager.getInstance(context)
     }
     @Provides
     @Singleton
-    fun provideHomeDataSource(dao: HomeDao, api: HomeApi, alarmHandler: AlarmHandler): HomeDataSource = HomeLocalSource(dao, api,alarmHandler)
+    fun provideHomeDataSource(dao: HomeDao, api: HomeApi, alarmHandler: AlarmHandler, workManager: WorkManager): HomeDataSource = HomeLocalSource(dao, api,alarmHandler, workManager)
 
     @Provides
     @Singleton
     fun provideHomeUseCases(repository: HomeDataSource): HomeUseCases = HomeUseCases(
         completeHabitUseCase = CompleteHabitUseCase(repository),
-        getHabitsForDate = GetHabitsForDate(repository)
+        getHabitsForDate = GetHabitsForDate(repository),
+        syncHabits = SyncHabits(repository)
     )
 
     @Provides
