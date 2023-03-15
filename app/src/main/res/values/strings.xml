@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">HabitsApp</string>
+
+    <string name="titleOnboarding1">WELCOME TO Monumental habits</string>
+    <string name="subtitleOnboarding1">We can help you to be a better version of yourself.</string>
+    <string name="titleOnboarding2">CREATE NEW HABIT EASILY</string>
+    <string name="subtitleOnboarding2">We can help you to be a better version of yourself.</string>
+    <string name="titleOnboarding3">KEEP TRACK OF YOUR PROGRESS</string>
+    <string name="subtitleOnboarding3">We can help you to be a better version of yourself.</string>
+    <string name="titleOnboarding4">JOIN A SUPPORTIVE COMMUNITY</string>
+    <string name="subtitleOnboarding4">We can help you to be a better version of yourself.</string>
 </resources>

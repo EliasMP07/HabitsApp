@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.devdroid.habitsapp.onboarding.presentation.OnboardingScreen
 
 @Composable
 fun  NavigationHost(
@@ -16,7 +17,9 @@ fun  NavigationHost(
         startDestination = startDestination.route){
 
         composable(NavigationRoute.Onboarding.route){
-            Text(text = "fdsfs")
+            OnboardingScreen{
+
+            }
         }
     }
 }
