@@ -5,13 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.devdroid.habitsapp.authentication.data.repository.AuthenticationFirebaseSource
-import com.devdroid.habitsapp.authentication.domain.repository.AuthenticationDataSource
 import com.devdroid.habitsapp.authentication.domain.usecases.LoginUseCases
-import com.devdroid.habitsapp.authentication.domain.usecases.LoginWithEmailUseCase
 import com.devdroid.habitsapp.authentication.domain.usecases.PasswordResult
-import com.devdroid.habitsapp.authentication.domain.usecases.ValidateEmailUseCase
-import com.devdroid.habitsapp.authentication.domain.usecases.ValidatePasswordUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
