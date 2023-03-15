@@ -18,8 +18,12 @@ fun  NavigationHost(
 
         composable(NavigationRoute.Onboarding.route){
             OnboardingScreen{
-
+                navController.popBackStack()
+                navController.navigate(NavigationRoute.Login.route)
             }
+        }
+        composable(NavigationRoute.Login.route){
+            Text(text = "Pantalla Login")
         }
     }
 }
