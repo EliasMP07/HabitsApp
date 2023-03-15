@@ -24,4 +24,8 @@ class AuthenticationFirebaseSource : AuthenticationDataSource{
             Result.failure(e)
         }
     }
+
+    override fun getUserId(): String? {
+        return Firebase.auth.currentUser?.uid
+    }
 }

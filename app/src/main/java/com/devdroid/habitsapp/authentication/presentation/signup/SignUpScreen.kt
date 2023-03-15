@@ -25,9 +25,15 @@ fun SignUpScreen(
 ) {
     val state = viewModel.state
 
-    LaunchedEffect(key1 = state.isSignedIn) {
-        if (state.isSignedIn){
+    LaunchedEffect(state.isSignedIn) {
+        if (state.isSignedIn) {
             onSignIn()
+        }
+    }
+
+    LaunchedEffect(state.logIn) {
+        if (state.logIn) {
+            onLogin()
         }
     }
 
@@ -41,7 +47,7 @@ fun SignUpScreen(
             painter = painterResource(id = R.drawable.signup),
             contentDescription = ""
         )
-        SignUpForm(state = state, onEvent = viewModel::onEvent, modifier = Modifier.fillMaxWidth(), onSignUp = onLogin)
+        SignUpForm(state = state, onEvent = viewModel::onEvent, modifier = Modifier.fillMaxWidth())
 
     }
     if (state.isLoading){
