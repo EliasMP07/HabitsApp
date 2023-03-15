@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.devdroid.habitsapp.home.domain.detail.usecases.DetailUseCases
 import com.devdroid.habitsapp.home.domain.models.Habit
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.UUID
 import javax.inject.Inject
@@ -24,7 +25,7 @@ class DetailViewModel @Inject constructor(
     init {
         val id = savedStateHandle.get<String>("habitId")
         if (id != null) {
-            viewModelScope.launch {
+            viewModelScope.launch{
                 val habit = detailUseCases.getHabitById(id)
                 state = state.copy(
                     id = habit.id,
@@ -43,13 +44,13 @@ class DetailViewModel @Inject constructor(
     ) {
         when (event) {
             is DetailEvent.FrecuencyChange -> {
-                val frecuency = if (state.frequency.contains(event.dayOfWeek)) {
+                val frequency = if (state.frequency.contains(event.dayOfWeek)) {
                     state.frequency - event.dayOfWeek
                 } else {
                     state.frequency + event.dayOfWeek
                 }
                 state = state.copy(
-                    frequency = frecuency
+                    frequency = frequency
                 )
             }
 
@@ -64,10 +65,12 @@ class DetailViewModel @Inject constructor(
                         startDate = state.startDate
                     )
                     detailUseCases.insertHabit(habit)
+
                 }
                 state = state.copy(
                     isSave = true
                 )
+
             }
 
             is DetailEvent.NameChange -> {

@@ -16,30 +16,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.time.ZonedDateTime
 
+
 @Composable
-fun HomeDataItem(
+fun HomeDateItem(
     date: ZonedDateTime,
     isSelected: Boolean,
     modifier: Modifier = Modifier,
-    onClick:(ZonedDateTime)-> Unit
+    onClick: () -> Unit
 ) {
     Box(
-        modifier = modifier.size(52.dp),
+        modifier = modifier
+            .size(52.dp),
         contentAlignment = Alignment.Center
-    ){
-        Box(modifier = Modifier
-            .clip(RoundedCornerShape(12.dp))
-            .background(Color.White)
-            .size(50.dp)
-            .clickable {
-                onClick(date)
-            },
+    ) {
+        Box(
+            modifier = Modifier
+                .clip(RoundedCornerShape(12.dp))
+                .background(Color.White)
+                .size(50.dp)
+                .clickable {
+                    onClick()
+                },
             contentAlignment = Alignment.Center
-        ){
+        ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -59,8 +63,8 @@ fun HomeDataItem(
                 )
             }
         }
-        if (isSelected){
-            Divider(
+        if (isSelected) {
+            androidx.compose.material3.Divider(
                 thickness = 4.dp,
                 modifier = Modifier
                     .align(Alignment.TopCenter)
@@ -70,5 +74,16 @@ fun HomeDataItem(
             )
         }
     }
+}
 
+@Preview
+@Composable
+fun HomeDateItemUnselectedPreview() {
+    HomeDateItem(date = ZonedDateTime.now(), isSelected = false) {}
+}
+
+@Preview
+@Composable
+fun HomeDateItemSelectedPreview() {
+    HomeDateItem(date = ZonedDateTime.now(), isSelected = true) {}
 }
