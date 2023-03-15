@@ -48,16 +48,20 @@ navigation: Modulo que contiene toda la navegacion de pantallas.
 ## Estructura de la app
 ![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/structureproject.png)
 
-## OnboardingScreen
-![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/onboarding1.png)
-![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/onboarding2.png)
-![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/onboarding3.png)
-![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/onboarding4.png)
-## Authentication
-![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/authenticationlogin.png)
-![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/authenticationregister.png)
-## Home
-![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/home_habits.png)
-![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/home_edit_habit.png)
-![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/home_create_habit.png)
+# HabitsApp
+
+## Onboarding Screens
+
+![Onboarding 1](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/onboarding1.png) ![Onboarding 2](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/onboarding2.png) ![Onboarding 3](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/onboarding3.png)
+
+![Onboarding 4](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/onboarding4.png)
+
+## Authentication Screens
+
+![Authentication Login](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/authenticationlogin.png) ![Authentication Register](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/authenticationregister.png)
+
+## Home Screens
+
+![Home Habits](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/home_habits.png) ![Home Edit Habit](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/home_edit_habit.png) ![Home Create Habit](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/home_create_habit.png)
+
 
