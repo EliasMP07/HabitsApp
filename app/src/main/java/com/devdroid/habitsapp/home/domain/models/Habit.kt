@@ -1,4 +1,4 @@
-package com.devdroid.habitsapp.home.presentation.domain.models
+package com.devdroid.habitsapp.home.domain.models
 
 import java.time.DayOfWeek
 import java.time.LocalDate

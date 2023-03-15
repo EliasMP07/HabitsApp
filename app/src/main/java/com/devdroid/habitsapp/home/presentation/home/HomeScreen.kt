@@ -12,9 +12,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -36,10 +38,17 @@ import java.time.ZonedDateTime
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    onNewHabit: () -> Unit,
+    onSetting: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state = viewModel.state
     Scaffold(
+        floatingActionButton = {
+            FloatingActionButton(onClick = { onNewHabit() }) {
+                Icon(imageVector = Icons.Default.Add, contentDescription = "Create Habit")
+            }
+        },
         modifier = Modifier.fillMaxSize(),
         topBar = {
             CenterAlignedTopAppBar(
@@ -91,10 +100,10 @@ fun HomeScreen(
             }
             items(
                 state.habits,
-                key = {habit ->
+                key = { habit ->
                     habit.id
                 }
-            ) {habit ->
+            ) { habit ->
                 HomeHabit(
                     habit = habit,
                     selectedDate = state.selectedDate.toLocalDate(),

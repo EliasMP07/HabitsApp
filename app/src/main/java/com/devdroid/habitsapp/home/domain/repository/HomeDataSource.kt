@@ -1,6 +1,6 @@
-package com.devdroid.habitsapp.home.presentation.domain.repository
+package com.devdroid.habitsapp.home.domain.repository
 
-import com.devdroid.habitsapp.home.presentation.domain.models.Habit
+import com.devdroid.habitsapp.home.domain.models.Habit
 import kotlinx.coroutines.flow.Flow
 import java.time.ZonedDateTime
 

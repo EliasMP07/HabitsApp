@@ -1,6 +1,6 @@
 package com.devdroid.habitsapp.home.presentation.home
 
-import com.devdroid.habitsapp.home.presentation.domain.models.Habit
+import com.devdroid.habitsapp.home.domain.models.Habit
 import java.time.ZonedDateTime
 
 sealed interface HomeEvent {
