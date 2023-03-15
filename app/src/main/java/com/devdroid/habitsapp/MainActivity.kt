@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    val viewModel by viewModels<MainViewModel>()
+   private val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -32,19 +32,22 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    NavigationHost(navController = navController, startDestination = getStartDestination())
+                    NavigationHost(
+                        navController = navController,
+                        startDestination = getStartDestination(),
+                        logout = { viewModel.logout() })
                 }
             }
         }
     }
 
-    private fun getStartDestination(): NavigationRoute{
-        if (viewModel.isLoggedIn){
+    private fun getStartDestination(): NavigationRoute {
+        if (viewModel.isLoggedIn) {
             return NavigationRoute.Home
         }
-        return if (viewModel.hasSeenOnboarding){
+        return if (viewModel.hasSeenOnboarding) {
             NavigationRoute.Login
-        }else{
+        } else {
             NavigationRoute.Onboarding
         }
     }

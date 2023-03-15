@@ -7,6 +7,7 @@ import com.devdroid.habitsapp.authentication.domain.repository.AuthenticationDat
 import com.devdroid.habitsapp.authentication.domain.usecases.GetUserIdUseCase
 import com.devdroid.habitsapp.authentication.domain.usecases.LoginUseCases
 import com.devdroid.habitsapp.authentication.domain.usecases.LoginWithEmailUseCase
+import com.devdroid.habitsapp.authentication.domain.usecases.Logout
 import com.devdroid.habitsapp.authentication.domain.usecases.SignUpUseCases
 import com.devdroid.habitsapp.authentication.domain.usecases.SignUpWithEmailUseCase
 import com.devdroid.habitsapp.authentication.domain.usecases.ValidateEmailUseCase
@@ -46,4 +47,10 @@ object AuthenticationModule {
         validateEmailUseCase = ValidateEmailUseCase(emailMatcher),
         validatePasswordUseCase = ValidatePasswordUseCase()
     )
+
+    @Singleton
+    @Provides
+    fun provideLogout(repository: AuthenticationDataSource): Logout{
+        return Logout(repository)
+    }
 }
