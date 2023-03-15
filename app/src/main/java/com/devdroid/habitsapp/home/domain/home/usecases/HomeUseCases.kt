@@ -1,4 +1,4 @@
-package com.devdroid.habitsapp.home.domain.usecases
+package com.devdroid.habitsapp.home.domain.home.usecases
 
 data class HomeUseCases(
     val completeHabitUseCase: CompleteHabitUseCase,

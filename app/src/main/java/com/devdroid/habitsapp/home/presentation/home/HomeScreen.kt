@@ -40,6 +40,7 @@ import java.time.ZonedDateTime
 fun HomeScreen(
     onNewHabit: () -> Unit,
     onSetting: () -> Unit,
+    onEditHabit:(String) ->Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state = viewModel.state
@@ -54,7 +55,9 @@ fun HomeScreen(
             CenterAlignedTopAppBar(
                 title = { Text(text = "Home") },
                 navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = {
+                        onSetting()
+                    }) {
                         Icon(imageVector = Icons.Default.Settings, contentDescription = "Settings")
                     }
                 }
@@ -111,7 +114,7 @@ fun HomeScreen(
                         viewModel.onEvent(HomeEvent.CompleteHabit(habit))
                     },
                     onHabitClick = {
-
+                        onEditHabit(habit.id)
                     })
             }
 
