@@ -1,13 +1,21 @@
 package com.devdroid.habitsapp.onboarding.presentation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.devdroid.habitsapp.R
 import com.devdroid.habitsapp.onboarding.presentation.components.OnboardingPager
 
 @Composable
 fun OnboardingScreen(
+    viewModel: OnboardingViewModel = hiltViewModel(),
     onFinish :() ->Unit
 ) {
+    LaunchedEffect(key1 = viewModel.hasSeenOnboarding) {
+       if (viewModel.hasSeenOnboarding) {
+           onFinish()
+       }
+    }
     val pages = listOf(
         OnBoardingPagerInformation(
             title = R.string.titleOnboarding1,
@@ -30,5 +38,9 @@ fun OnboardingScreen(
             image = R.drawable.onboarding4
         )
     )
-    OnboardingPager(pages = pages , onFinish = { onFinish() })
+    OnboardingPager(
+        pages = pages ,
+        onFinish = {
+            viewModel.completeOnboarding()
+        })
 }

@@ -17,7 +17,9 @@ fun HabitButton(
     onClick: () -> Unit
 ) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = {
+                  onClick()
+                  },
         modifier = modifier,
         shape = RoundedCornerShape(8.dp),
 
