@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    kotlin("kapt")
+    alias(libs.plugins.androidHilt)
+    alias(libs.plugins.googleService)
 }
 
 android {
@@ -50,6 +53,44 @@ android {
 }
 
 dependencies {
+    //Get day of week api 25 or lower
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
+    implementation(platform("com.google.firebase:firebase-bom:31.2.2"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.android.gms:play-services-auth:20.4.1")
+
+    implementation(libs.compose.dialogs)
+    implementation(libs.compose.dialogs.clock)
+
+    //Coil
+    implementation(libs.coil.compose)
+
+    //Pagger
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
+    implementation(libs.accompanist.permissions)
+
+    //Room
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+    implementation(libs.room.android)
+
+    //Retrofit
+    implementation(libs.logging.interceptor)
+    implementation(libs.converter.moshi)
+    implementation(libs.retrofit.android)
+
+    //Work
+    implementation(libs.work.runtime.ktx)
+    implementation(libs.hilt.work.android)
+
+    //NavigationCompose
+    implementation(libs.hilt.navigation.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
