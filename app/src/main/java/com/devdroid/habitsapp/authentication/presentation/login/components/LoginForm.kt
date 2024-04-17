@@ -16,7 +16,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -25,14 +27,19 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import com.devdroid.habitsapp.authentication.presentation.login.LoginEvent
+import com.devdroid.habitsapp.authentication.presentation.login.LoginState
 import com.devdroid.habitsapp.core.presentation.HabitButton
 import com.devdroid.habitsapp.core.presentation.HabitPasswordTextfield
 import com.devdroid.habitsapp.core.presentation.HabitTextfield
 
 @Composable
 fun LoginForm(
+    state: LoginState,
+    onEvent: (LoginEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val focusManager = LocalFocusManager.current
     Column(
         modifier = modifier.background(
             Color.White,
@@ -48,10 +55,14 @@ fun LoginForm(
         )
         HorizontalDivider(
             modifier = Modifier.padding(bottom = 16.dp),
-            color = MaterialTheme.colorScheme.background)
+            color = MaterialTheme.colorScheme.background
+        )
         HabitTextfield(
-            value = "Email",
-            onValueChange = {},
+            value = state.email,
+            isEnabled = !state.isLoading,
+            onValueChange = {
+                onEvent(LoginEvent.EmailChange(it))
+            },
             placeholder = "Email",
             contentDescription = "Enter email",
             modifier = Modifier
@@ -64,22 +75,25 @@ fun LoginForm(
                 keyboardType = KeyboardType.Email,
                 imeAction = ImeAction.Next
             ),
+            errorMessage = state.emailError,
             keyboardActions = KeyboardActions(
                 onAny = {
-
+                    focusManager.moveFocus(FocusDirection.Next)
                 }
             )
         )
         HabitPasswordTextfield(
-            value = "Password",
-            onValueChange = {},
+            value = state.password,
+            isEnabled = !state.isLoading,
+            onValueChange = {
+                onEvent(LoginEvent.PasswordChange(it))
+            },
             contentDescription = "",
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 6.dp)
                 .padding(horizontal = 20.dp),
-            errorMessage = null,
-            isEnabled = true,
+            errorMessage = state.passwordError,
             keyboardOptions = KeyboardOptions(
                 autoCorrect = false,
                 keyboardType = KeyboardType.Password,
@@ -87,7 +101,8 @@ fun LoginForm(
             ),
             keyboardActions = KeyboardActions(
                 onAny = {
-
+                    focusManager.clearFocus()
+                    onEvent(LoginEvent.Login)
                 }
             )
         )
@@ -96,9 +111,9 @@ fun LoginForm(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),
-            isEnable = true
+            isEnable = !state.isLoading,
         ) {
-            //
+            onEvent(LoginEvent.Login)
         }
         TextButton(onClick = { /*TODO*/ }) {
             Text(
@@ -107,11 +122,13 @@ fun LoginForm(
                 textDecoration = TextDecoration.Underline
             )
         }
-        TextButton(onClick = { /*TODO*/ }) {
+        TextButton(onClick = {
+            onEvent(LoginEvent.SignUp)
+        }) {
             Text(
                 text = buildAnnotatedString {
                     append("Don´t have an account? ")
-                    withStyle(SpanStyle(fontWeight = FontWeight.Bold)){
+                    withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
                         append("Sign up")
                     }
                 },

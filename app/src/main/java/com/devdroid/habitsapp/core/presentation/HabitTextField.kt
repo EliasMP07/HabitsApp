@@ -42,10 +42,10 @@ fun HabitPasswordTextfield(
     placeholder: String = "Password",
     errorMessage: String? = null,
     leadingIcon: ImageVector? = Icons.Outlined.Lock,
-    isEnabled: Boolean = true,
     keyboardOptions: KeyboardOptions = KeyboardOptions(),
     keyboardActions: KeyboardActions = KeyboardActions(),
-    backgroundColor: Color = MaterialTheme.colorScheme.background
+    backgroundColor: Color = MaterialTheme.colorScheme.background,
+    isEnabled: Boolean = true,
 ) {
     HabitTextfield(
         value = value,
