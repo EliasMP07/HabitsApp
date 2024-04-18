@@ -82,7 +82,8 @@ fun LoginScreen(
             }
             LoginForm(
                 state,
-                viewModel::onEvent
+                viewModel::onEvent,
+                onSignUp
             )
         }
 

@@ -6,6 +6,8 @@ import com.devdroid.habitsapp.authentication.domain.matcher.EmailMatcher
 import com.devdroid.habitsapp.authentication.domain.repository.AuthenticationDataSource
 import com.devdroid.habitsapp.authentication.domain.usecases.LoginUseCases
 import com.devdroid.habitsapp.authentication.domain.usecases.LoginWithEmailUseCase
+import com.devdroid.habitsapp.authentication.domain.usecases.SignUpUseCases
+import com.devdroid.habitsapp.authentication.domain.usecases.SignUpWithEmailUseCase
 import com.devdroid.habitsapp.authentication.domain.usecases.ValidateEmailUseCase
 import com.devdroid.habitsapp.authentication.domain.usecases.ValidatePasswordUseCase
 import dagger.Module
@@ -29,6 +31,13 @@ object AuthenticationModule {
     @Singleton
     fun provideLoginUseCases(repository: AuthenticationDataSource, emailMatcher: EmailMatcher): LoginUseCases = LoginUseCases(
         loginWithEmailUseCase = LoginWithEmailUseCase(repository),
+        validateEmailUseCase = ValidateEmailUseCase(emailMatcher),
+        validatePasswordUseCase = ValidatePasswordUseCase()
+    )
+    @Provides
+    @Singleton
+    fun provideSignUpUseCases(repository: AuthenticationDataSource, emailMatcher: EmailMatcher): SignUpUseCases = SignUpUseCases(
+        signUpWithEmailUseCase = SignUpWithEmailUseCase(repository),
         validateEmailUseCase = ValidateEmailUseCase(emailMatcher),
         validatePasswordUseCase = ValidatePasswordUseCase()
     )
