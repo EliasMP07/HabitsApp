@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -27,10 +28,23 @@ import com.devdroid.habitsapp.core.presentation.HabitTitle
 
 @Composable
 fun LoginScreen(
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: LoginViewModel = hiltViewModel(),
+    onLogin: () -> Unit,
+    onSignUp : () -> Unit
 ) {
 
     val state = viewModel.state
+    LaunchedEffect(key1 = state.isLoggedIn) {
+        if (state.isLoggedIn) {
+            onLogin()
+        }
+    }
+
+    LaunchedEffect(key1 = state.signUp) {
+        if (state.signUp) {
+            onSignUp()
+        }
+    }
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             modifier = Modifier

@@ -1,6 +1,7 @@
 package com.devdroid.habitsapp.authentication.presentation.login.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -9,6 +10,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -40,102 +42,109 @@ fun LoginForm(
     modifier: Modifier = Modifier
 ) {
     val focusManager = LocalFocusManager.current
-    Column(
-        modifier = modifier.background(
-            Color.White,
-            shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
-        ),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "Login in with Email",
-            modifier = Modifier.padding(12.dp),
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.tertiary
-        )
-        HorizontalDivider(
-            modifier = Modifier.padding(bottom = 16.dp),
-            color = MaterialTheme.colorScheme.background
-        )
-        HabitTextfield(
-            value = state.email,
-            isEnabled = !state.isLoading,
-            onValueChange = {
-                onEvent(LoginEvent.EmailChange(it))
-            },
-            placeholder = "Email",
-            contentDescription = "Enter email",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 6.dp)
-                .padding(horizontal = 20.dp),
-            leadingIcon = Icons.Default.Email,
-            keyboardOptions = KeyboardOptions(
-                autoCorrect = false,
-                keyboardType = KeyboardType.Email,
-                imeAction = ImeAction.Next
+    Box(modifier = modifier, contentAlignment = Alignment.Center) {
+        Column(
+            modifier = Modifier.background(
+                Color.White,
+                shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
             ),
-            errorMessage = state.emailError,
-            keyboardActions = KeyboardActions(
-                onAny = {
-                    focusManager.moveFocus(FocusDirection.Next)
-                }
-            )
-        )
-        HabitPasswordTextfield(
-            value = state.password,
-            isEnabled = !state.isLoading,
-            onValueChange = {
-                onEvent(LoginEvent.PasswordChange(it))
-            },
-            contentDescription = "",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 6.dp)
-                .padding(horizontal = 20.dp),
-            errorMessage = state.passwordError,
-            keyboardOptions = KeyboardOptions(
-                autoCorrect = false,
-                keyboardType = KeyboardType.Password,
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onAny = {
-                    focusManager.clearFocus()
-                    onEvent(LoginEvent.Login)
-                }
-            )
-        )
-        HabitButton(
-            text = "Login",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp),
-            isEnable = !state.isLoading,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            onEvent(LoginEvent.Login)
-        }
-        TextButton(onClick = { /*TODO*/ }) {
             Text(
-                text = "Forgot password",
-                color = MaterialTheme.colorScheme.tertiary,
-                textDecoration = TextDecoration.Underline
+                text = "Login in with Email",
+                modifier = Modifier.padding(12.dp),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.tertiary
             )
-        }
-        TextButton(onClick = {
-            onEvent(LoginEvent.SignUp)
-        }) {
-            Text(
-                text = buildAnnotatedString {
-                    append("Don´t have an account? ")
-                    withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
-                        append("Sign up")
-                    }
+            HorizontalDivider(
+                modifier = Modifier.padding(bottom = 16.dp),
+                color = MaterialTheme.colorScheme.background
+            )
+            HabitTextfield(
+                value = state.email,
+                isEnabled = !state.isLoading,
+                onValueChange = {
+                    onEvent(LoginEvent.EmailChange(it))
                 },
-                color = MaterialTheme.colorScheme.tertiary,
-                textDecoration = TextDecoration.Underline
+                placeholder = "Email",
+                contentDescription = "Enter email",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 6.dp)
+                    .padding(horizontal = 20.dp),
+                leadingIcon = Icons.Default.Email,
+                keyboardOptions = KeyboardOptions(
+                    autoCorrect = false,
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next
+                ),
+                errorMessage = state.emailError,
+                keyboardActions = KeyboardActions(
+                    onAny = {
+                        focusManager.moveFocus(FocusDirection.Next)
+                    }
+                )
             )
+            HabitPasswordTextfield(
+                value = state.password,
+                isEnabled = !state.isLoading,
+                onValueChange = {
+                    onEvent(LoginEvent.PasswordChange(it))
+                },
+                contentDescription = "",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 6.dp)
+                    .padding(horizontal = 20.dp),
+                errorMessage = state.passwordError,
+                keyboardOptions = KeyboardOptions(
+                    autoCorrect = false,
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onAny = {
+                        focusManager.clearFocus()
+                        onEvent(LoginEvent.Login)
+                    }
+                )
+            )
+            HabitButton(
+                text = "Login",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp),
+                isEnable = !state.isLoading,
+            ) {
+                onEvent(LoginEvent.Login)
+            }
+            TextButton(onClick = { /*TODO*/ }) {
+                Text(
+                    text = "Forgot password",
+                    color = MaterialTheme.colorScheme.tertiary,
+                    textDecoration = TextDecoration.Underline
+                )
+            }
+            TextButton(onClick = {
+                onEvent(LoginEvent.SignUp)
+            }) {
+                Text(
+                    text = buildAnnotatedString {
+                        append("Don´t have an account? ")
+                        withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                            append("Sign up")
+                        }
+                    },
+                    color = MaterialTheme.colorScheme.tertiary,
+                    textDecoration = TextDecoration.Underline
+                )
+            }
+
         }
 
+        if (state.isLoading){
+            CircularProgressIndicator()
+        }
     }
+
 }

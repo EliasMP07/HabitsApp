@@ -4,12 +4,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.devdroid.habitsapp.authentication.data.repository.AuthenticationFirebaseSource
+import com.devdroid.habitsapp.authentication.domain.repository.AuthenticationDataSource
+import com.devdroid.habitsapp.authentication.domain.usecases.LoginUseCases
+import com.devdroid.habitsapp.authentication.domain.usecases.LoginWithEmailUseCase
+import com.devdroid.habitsapp.authentication.domain.usecases.PasswordResult
+import com.devdroid.habitsapp.authentication.domain.usecases.ValidateEmailUseCase
+import com.devdroid.habitsapp.authentication.domain.usecases.ValidatePasswordUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-
+    private val loginUseCases: LoginUseCases
 ):ViewModel() {
     var state by mutableStateOf(LoginState())
         private set
@@ -40,6 +49,41 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun login(){
+        state = state.copy(
+            emailError = null,
+            passwordError = null
+        )
+        if (loginUseCases.validateEmailUseCase(state.email)){
+            state = state.copy(
+                emailError = "El email no es valido"
+            )
+        }
+        val passwordResult = loginUseCases.validatePasswordUseCase(state.password)
+        if (passwordResult is PasswordResult.Invalid){
+            state = state.copy(
+                passwordError = passwordResult.erroMessage
+            )
+        }
+        if (state.emailError == null && state.passwordError  == null){
+            state = state.copy(
+                isLoading = true
+            )
+            viewModelScope.launch {
+                loginUseCases.loginWithEmailUseCase(state.email, state.password).onSuccess {
+                    state = state.copy(
+                        isLoggedIn = true
+                    )
+                }.onFailure {
+                    val error = it.message
+                    println("No funcion, $error")
+                }
+
+                state = state.copy(
+                    isLoading = false
+                )
+            }
+        }
+
 
     }
 }
