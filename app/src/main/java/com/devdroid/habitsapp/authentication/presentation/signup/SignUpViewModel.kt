@@ -39,6 +39,11 @@ class SignUpViewModel @Inject constructor(
                 signUp()
 
             }
+
+            SignUpEvent.LogIn ->
+                state = state.copy(
+                logIn = true
+            )
         }
     }
     private fun signUp(){

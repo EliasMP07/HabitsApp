@@ -4,6 +4,7 @@ import com.devdroid.habitsapp.authentication.data.matcher.EmailMatcherAndroid
 import com.devdroid.habitsapp.authentication.data.repository.AuthenticationFirebaseSource
 import com.devdroid.habitsapp.authentication.domain.matcher.EmailMatcher
 import com.devdroid.habitsapp.authentication.domain.repository.AuthenticationDataSource
+import com.devdroid.habitsapp.authentication.domain.usecases.GetUserIdUseCase
 import com.devdroid.habitsapp.authentication.domain.usecases.LoginUseCases
 import com.devdroid.habitsapp.authentication.domain.usecases.LoginWithEmailUseCase
 import com.devdroid.habitsapp.authentication.domain.usecases.SignUpUseCases
@@ -27,6 +28,10 @@ object AuthenticationModule {
     @Singleton
     fun provideEmailMatcherAndroid (): EmailMatcher = EmailMatcherAndroid()
 
+
+    @Provides
+    @Singleton
+    fun provideGetUserIdUseCase(repository: AuthenticationDataSource) : GetUserIdUseCase = GetUserIdUseCase(repository)
     @Provides
     @Singleton
     fun provideLoginUseCases(repository: AuthenticationDataSource, emailMatcher: EmailMatcher): LoginUseCases = LoginUseCases(
