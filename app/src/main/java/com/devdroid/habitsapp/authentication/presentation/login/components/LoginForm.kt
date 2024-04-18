@@ -91,7 +91,7 @@ fun LoginForm(
                 onValueChange = {
                     onEvent(LoginEvent.PasswordChange(it))
                 },
-                contentDescription = "",
+                contentDescription = "Enter password",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 6.dp)
