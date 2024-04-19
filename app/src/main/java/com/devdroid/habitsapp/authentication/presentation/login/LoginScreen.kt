@@ -40,11 +40,6 @@ fun LoginScreen(
         }
     }
 
-    LaunchedEffect(key1 = state.signUp) {
-        if (state.signUp) {
-            onSignUp()
-        }
-    }
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             modifier = Modifier

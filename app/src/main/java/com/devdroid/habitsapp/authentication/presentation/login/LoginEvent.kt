@@ -5,5 +5,4 @@ sealed interface LoginEvent {
     data class PasswordChange(val password: String): LoginEvent
 
     object Login: LoginEvent
-    object SignUp: LoginEvent
 }
