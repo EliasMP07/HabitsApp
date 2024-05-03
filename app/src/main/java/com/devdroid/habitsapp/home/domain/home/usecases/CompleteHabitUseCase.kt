@@ -1,4 +1,4 @@
-package com.devdroid.habitsapp.home.domain.usecases
+package com.devdroid.habitsapp.home.domain.home.usecases
 
 import com.devdroid.habitsapp.home.domain.models.Habit
 import com.devdroid.habitsapp.home.domain.repository.HomeDataSource

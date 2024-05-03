@@ -3,8 +3,10 @@ package com.devdroid.habitsapp.navigation
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.devdroid.habitsapp.authentication.presentation.login.LoginScreen
 import com.devdroid.habitsapp.authentication.presentation.signup.SignUpScreen
 import com.devdroid.habitsapp.home.presentation.detail.DetailScreen
@@ -60,10 +62,19 @@ fun  NavigationHost(
                 },
                 onNewHabit = {
                     navController.navigate(NavigationRoute.Detail.route)
+                },
+                onEditHabit = {
+                    navController.navigate(NavigationRoute.Detail.route + "?habitId=$it")
                 }
             )
         }
-        composable(NavigationRoute.Detail.route){
+        composable(NavigationRoute.Detail.route + "?habitId={habitId}", arguments = listOf(
+            navArgument("habitId"){
+                type = NavType.StringType
+                nullable = true
+                defaultValue = null
+            }
+        )){
             DetailScreen(onBack = { navController.navigateUp() }, onSave = { /*TODO*/ })
         }
     }
