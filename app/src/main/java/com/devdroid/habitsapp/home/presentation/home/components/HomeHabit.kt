@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.devdroid.habitsapp.core.presentation.HabitCheckBox
-import com.devdroid.habitsapp.home.presentation.domain.models.Habit
+import com.devdroid.habitsapp.home.domain.models.Habit
 import java.time.LocalDate
 
 @Composable

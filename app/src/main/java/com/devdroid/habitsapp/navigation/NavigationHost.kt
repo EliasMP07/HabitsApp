@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.devdroid.habitsapp.authentication.presentation.login.LoginScreen
 import com.devdroid.habitsapp.authentication.presentation.signup.SignUpScreen
+import com.devdroid.habitsapp.home.presentation.detail.DetailScreen
 import com.devdroid.habitsapp.home.presentation.home.HomeScreen
 import com.devdroid.habitsapp.onboarding.presentation.OnboardingScreen
 
@@ -53,7 +54,17 @@ fun  NavigationHost(
             )
         }
         composable(NavigationRoute.Home.route){
-            HomeScreen()
+            HomeScreen(
+                onSetting = {
+
+                },
+                onNewHabit = {
+                    navController.navigate(NavigationRoute.Detail.route)
+                }
+            )
+        }
+        composable(NavigationRoute.Detail.route){
+            DetailScreen(onBack = { navController.navigateUp() }, onSave = { /*TODO*/ })
         }
     }
 }

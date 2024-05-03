@@ -1,7 +1,7 @@
-package com.devdroid.habitsapp.home.presentation.domain.home.usecases
+package com.devdroid.habitsapp.home.domain.usecases
 
-import com.devdroid.habitsapp.home.presentation.domain.models.Habit
-import com.devdroid.habitsapp.home.presentation.domain.repository.HomeDataSource
+import com.devdroid.habitsapp.home.domain.models.Habit
+import com.devdroid.habitsapp.home.domain.repository.HomeDataSource
 import kotlinx.coroutines.flow.Flow
 import java.time.ZonedDateTime
 import javax.inject.Inject

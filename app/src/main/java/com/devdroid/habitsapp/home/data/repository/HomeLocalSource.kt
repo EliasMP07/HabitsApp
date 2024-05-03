@@ -1,14 +1,14 @@
-package com.devdroid.habitsapp.home.presentation.data.repository
+package com.devdroid.habitsapp.home.data.repository
 
-import com.devdroid.habitsapp.home.presentation.domain.models.Habit
-import com.devdroid.habitsapp.home.presentation.domain.repository.HomeDataSource
+import com.devdroid.habitsapp.home.domain.models.Habit
+import com.devdroid.habitsapp.home.domain.repository.HomeDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZonedDateTime
 
-class HomeLocalSource : HomeDataSource{
+class HomeLocalSource : HomeDataSource {
 
 
 
