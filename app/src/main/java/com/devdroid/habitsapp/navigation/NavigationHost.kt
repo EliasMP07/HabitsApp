@@ -75,7 +75,7 @@ fun  NavigationHost(
                 defaultValue = null
             }
         )){
-            DetailScreen(onBack = { navController.navigateUp() }, onSave = { /*TODO*/ })
+            DetailScreen(onBack = { navController.navigateUp() }, onSave = { navController.navigateUp() })
         }
     }
 }

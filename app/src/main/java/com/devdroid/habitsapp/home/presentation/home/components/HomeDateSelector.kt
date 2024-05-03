@@ -22,12 +22,15 @@ fun HomeDateSelector(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(6.dp)
-    ){
-       for (i in datesToShow downTo 0){
-           val date = mainDate.minusDays(i.toLong())
-           HomeDataItem(date = date, isSelected = selectedDate.toLocalDate() == date.toLocalDate()) {
-                onDateClick(it)
-           }
-       }
+    ) {
+        for (i in datesToShow downTo 0) {
+            val date = mainDate.minusDays(i.toLong())
+            HomeDateItem(
+                date = date,
+                isSelected = selectedDate.toLocalDate() == date.toLocalDate()
+            ) {
+                onDateClick(date)
+            }
+        }
     }
 }
