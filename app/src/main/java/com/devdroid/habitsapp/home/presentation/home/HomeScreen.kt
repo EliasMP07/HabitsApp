@@ -1,5 +1,6 @@
 package com.devdroid.habitsapp.home.presentation.home
 
+import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,10 +31,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.devdroid.habitsapp.R
+import com.devdroid.habitsapp.home.presentation.home.components.HomeAskPermission
 import com.devdroid.habitsapp.home.presentation.home.components.HomeDateSelector
 import com.devdroid.habitsapp.home.presentation.home.components.HomeHabit
 import com.devdroid.habitsapp.home.presentation.home.components.HomeQuote
-import java.time.ZonedDateTime
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,6 +65,9 @@ fun HomeScreen(
             )
         }
     ) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            HomeAskPermission(permission = android.Manifest.permission.POST_NOTIFICATIONS)
+        }
         LazyColumn(
             modifier = Modifier
                 .padding(it)

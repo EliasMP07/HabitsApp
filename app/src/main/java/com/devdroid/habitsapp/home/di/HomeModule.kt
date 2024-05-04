@@ -2,10 +2,13 @@ package com.devdroid.habitsapp.home.di
 
 import android.content.Context
 import androidx.room.Room
+import com.devdroid.habitsapp.home.data.alarm.AlarmHandlerAndroid
 import com.devdroid.habitsapp.home.data.local.dao.HomeDao
 import com.devdroid.habitsapp.home.data.local.database.HomeDatabase
 import com.devdroid.habitsapp.home.data.local.typeConverter.HomeTypeConverter
+import com.devdroid.habitsapp.home.data.remote.api.HomeApi
 import com.devdroid.habitsapp.home.data.repository.HomeLocalSource
+import com.devdroid.habitsapp.home.domain.alarm.AlarmHandler
 import com.devdroid.habitsapp.home.domain.detail.usecases.DetailUseCases
 import com.devdroid.habitsapp.home.domain.detail.usecases.GetHabitById
 import com.devdroid.habitsapp.home.domain.detail.usecases.InsertHabit
@@ -19,12 +22,31 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object HomeModule {
 
+    @Provides
+    @Singleton
+    fun provideOkHttpCliente(): OkHttpClient{
+        return OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }).build()
+    }
+    @Singleton
+    @Provides
+    fun provideHomeApi(okHttpClient: OkHttpClient): HomeApi{
+        return Retrofit.Builder()
+            .baseUrl(HomeApi.BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(MoshiConverterFactory.create()).build().create(HomeApi::class.java)
+    }
     @Provides
     @Singleton
     fun provideHabitDao(@ApplicationContext context: Context, moshi: Moshi): HomeDao {
@@ -37,7 +59,12 @@ object HomeModule {
 
     @Provides
     @Singleton
-    fun provideHomeDataSource(dao: HomeDao): HomeDataSource = HomeLocalSource(dao)
+    fun provideAlarmHandler(@ApplicationContext context: Context): AlarmHandler{
+        return AlarmHandlerAndroid(context)
+    }
+    @Provides
+    @Singleton
+    fun provideHomeDataSource(dao: HomeDao, api: HomeApi, alarmHandler: AlarmHandler): HomeDataSource = HomeLocalSource(dao, api,alarmHandler)
 
     @Provides
     @Singleton
@@ -58,4 +85,6 @@ object HomeModule {
     fun provideMoshi(): Moshi{
         return Moshi.Builder().build()
     }
+
+
 }
