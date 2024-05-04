@@ -13,13 +13,11 @@ import java.lang.NumberFormatException
 class HomeTypeConverter(
     private val moshi: Moshi
 ) {
-    @SuppressLint("RestrictedApi")
     @TypeConverter
     fun fromFrequency(days: List<Int>): String {
         return joinIntoString(days) ?: ""
     }
 
-    @SuppressLint("RestrictedApi")
     @TypeConverter
     fun toFrequency(value: String): List<Int> {
         return splitToIntList(value) ?: emptyList()

@@ -54,58 +54,69 @@ android {
 }
 
 dependencies {
-    //Get day of week api 25 or lower
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
+    // Get day of week api 25 or lower
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
 
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
-
-    implementation(platform("com.google.firebase:firebase-bom:31.2.2"))
-    implementation("com.google.firebase:firebase-analytics-ktx")
-    implementation("com.google.firebase:firebase-auth-ktx")
-    implementation("com.google.android.gms:play-services-auth:20.4.1")
-
-    implementation(libs.compose.dialogs)
-    implementation(libs.compose.dialogs.clock)
-
-    //Coil
-    implementation(libs.coil.compose)
-
-    //Pagger
-    implementation(libs.accompanist.pager)
-    implementation(libs.accompanist.pager.indicators)
-    implementation(libs.accompanist.permissions)
-
-    //Room
-    implementation(libs.room.runtime)
-    kapt(libs.room.compiler)
-    implementation(libs.room.android)
-
-    //Retrofit
-    implementation(libs.logging.interceptor)
-    implementation(libs.converter.moshi)
-    implementation(libs.retrofit.android)
-
-    //Work
-    implementation(libs.work.runtime.ktx)
-    implementation(libs.hilt.work.android)
-
-    //NavigationCompose
-    implementation(libs.hilt.navigation.compose)
+    implementation(libs.core)
+    implementation(libs.clock)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.ui)
+    implementation(libs.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    // Compose Navigation
+    implementation(libs.androidx.navigation.compose)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics.ktx)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.auth)
+
+    // Dagger Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
+    kapt(libs.androidx.hilt.compiler)
+
+    // Coil
+    implementation(libs.coil.compose)
+
+    // Pager
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
+
+    // Permissions
+    implementation(libs.accompanist.permissions)
+
+    // Room
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.logging.interceptor)
+
+    // WorkManager
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+
+    // Testing
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    kaptAndroidTest(libs.hilt.android.compiler)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation(libs.turbine)
+    androidTestImplementation(libs.hilt.android.testing)
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.androidx.work.testing)
 }
