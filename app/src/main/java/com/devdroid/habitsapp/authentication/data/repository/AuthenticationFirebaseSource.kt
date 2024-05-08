@@ -28,4 +28,8 @@ class AuthenticationFirebaseSource : AuthenticationDataSource{
     override fun getUserId(): String? {
         return Firebase.auth.currentUser?.uid
     }
+
+    override suspend fun logout() {
+        Firebase.auth.signOut()
+    }
 }

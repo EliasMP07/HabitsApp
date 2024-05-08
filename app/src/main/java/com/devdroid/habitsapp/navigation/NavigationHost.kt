@@ -12,11 +12,13 @@ import com.devdroid.habitsapp.authentication.presentation.signup.SignUpScreen
 import com.devdroid.habitsapp.home.presentation.detail.DetailScreen
 import com.devdroid.habitsapp.home.presentation.home.HomeScreen
 import com.devdroid.habitsapp.onboarding.presentation.OnboardingScreen
+import com.devdroid.habitsapp.settings.presentation.SettingsScreen
 
 @Composable
 fun  NavigationHost(
     navController: NavHostController,
-    startDestination: NavigationRoute
+    startDestination: NavigationRoute,
+    logout: () -> Unit
 ){
     NavHost(
         navController = navController,
@@ -58,7 +60,7 @@ fun  NavigationHost(
         composable(NavigationRoute.Home.route){
             HomeScreen(
                 onSetting = {
-
+                    navController.navigate(NavigationRoute.Settings.route)
                 },
                 onNewHabit = {
                     navController.navigate(NavigationRoute.Detail.route)
@@ -76,6 +78,22 @@ fun  NavigationHost(
             }
         )){
             DetailScreen(onBack = { navController.navigateUp() }, onSave = { navController.navigateUp() })
+        }
+
+        composable(NavigationRoute.Settings.route) {
+            SettingsScreen(
+                onBack = {
+                    navController.popBackStack()
+                },
+                onLogout = {
+                    logout()
+                    navController.navigate(NavigationRoute.Login.route) {
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
         }
     }
 }
