@@ -46,11 +46,18 @@ navigation: Modulo que contiene toda la navegacion de pantallas.
 
 
 ## Estructura de la app
-![Image text](https://github.com/EliasMP07/rickandmorty-api-clean_architecture-mvvm-retrofit-hilt-room/blob/main/app/src/main/assets/structureProject.png)
+![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/structureproject.png)
 
 ## OnboardingScreen
-
+![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/onboarding1.png)
+![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/onboarding2.png)
+![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/onboarding3.png)
+![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/onboarding4.png)
 ## Authentication
-
+![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/authenticationlogin.png)
+![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/authenticationregister.png)
 ## Home
+![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/home_habits.png)
+![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/home_edit_habit.png)
+![Image text](https://github.com/EliasMP07/HabitsApp/blob/master/app/src/main/assets/home_create_habit.png)
 
